@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar sesión | Barbería</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
+</head>
+
+
+<body>
+
+    <main class="auth-page">
+
+        <section class="auth-card">
+
+            <!-- LOGO -->
+
+            <a href="{% url 'inicio' %}" class="auth-logo">
+                <img
+                    src="{% static 'img/Logo.jpg' %}"
+                    alt="Logo de la barbería"
+                >
+            </a>
+
+
+            <!-- ENCABEZADO -->
+
+            <div class="auth-header">
+
+                <p>BIENVENIDO DE NUEVO</p>
+
+                <h1>Iniciar sesión</h1>
+
+                <span>
+                    Accede a tu cuenta para gestionar tus citas.
+                </span>
+
+            </div>
+
+
+            <!-- FORMULARIO -->
+
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="form-message">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <form id="loginForm" method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="tu@email.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="••••••••"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        <span>Recordarme</span>
+
+                    </label>
+
+                    <a href="#">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-button"
+                >
+                    Iniciar sesión
+                </button>
+
+            </form>
+
+
+            <!-- REGISTRO -->
+
+            <div class="auth-footer">
+
+                <span>
+                    ¿Todavía no tienes una cuenta?
+                </span>
+
+                <a href="#">
+                    Crear cuenta
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="{% static 'js/auth.js' %}"></script>
+
+</body>
+
+</html>
